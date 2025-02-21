@@ -1,0 +1,9 @@
+[build]
+  # Indica dónde están los archivos compilados de Angular
+  publish = "dist/mygamestracker-app/browser"
+  # Directorio donde se encuentran las funciones de Netlify
+  functions = ".netlify/functions"
+
+[dev]
+  # Puerto para la simulación local de funciones
+  functionsPort = 8888
