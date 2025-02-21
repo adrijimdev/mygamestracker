@@ -6,4 +6,4 @@
 
 [dev]
   # Puerto para la simulación local de funciones
-  functionsPort = 8888
+  functionsPort = 9999
