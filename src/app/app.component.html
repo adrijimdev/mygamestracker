@@ -1,4 +1,8 @@
 <div id="container">
+  <div>
+    <div (click)="previousPage()" *ngIf="this.offset > 0">Previous page</div>
+    <div (click)="nextPage()">Next page</div>
+  </div>
   <div id="games-list">
     <div *ngFor="let game of gamesList">
       <!-- tamaños imagen: t_1080p, t_thumb, t_cover_big, t_cover_big_2x -->

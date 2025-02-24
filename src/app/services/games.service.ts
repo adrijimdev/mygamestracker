@@ -13,8 +13,8 @@ export class GamesService {
   constructor(private http: HttpClient) { }
 
   //Get all games
-  getAllGames(): Observable<GameModel[]> {
-    return this.http.get<any[]>(this.functionUrl).pipe(
+  getAllGames(offset: number): Observable<GameModel[]> {
+    return this.http.get<any[]>(`${this.functionUrl}/${offset}`).pipe(
       map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
     );
   }
