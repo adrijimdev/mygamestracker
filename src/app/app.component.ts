@@ -17,6 +17,7 @@ export class AppComponent {
   title = 'mygamestracker';
   gamesList : GameModel[] = [];
   genresList : GenreModel[] = [];
+  page = 1;
 
   constructor(private gamesService : GamesService, private genresService : GenresService) { }
 
@@ -25,15 +26,15 @@ export class AppComponent {
     this.bringGames()
   }
 
-  // previousPage() {
-  //   this.offset -= 20;
-  //   this.bringGames();
-  // }
+  previousPage() {
+    this.page -= 1;
+    this.bringGames();
+  }
 
-  // nextPage() {
-  //   this.offset += 20;
-  //   this.bringGames();
-  // }
+  nextPage() {
+    this.page += 1;
+    this.bringGames();
+  }
 
   // changeGenre(event : Event) {
   //   const selectedValue = (event.target as HTMLSelectElement).value;
@@ -45,7 +46,7 @@ export class AppComponent {
   // }
 
   bringGames() {
-    this.gamesService.getAllGames().subscribe({
+    this.gamesService.getAllGames(this.page).subscribe({
       next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
       error: (err) => console.error('Error al obtener juegos:', err)
     });

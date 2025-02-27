@@ -4,10 +4,10 @@
     <option value="">All genres</option>
     <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
   </select> -->
-  <!-- <div>
-    <div (click)="previousPage()" *ngIf="this.offset > 0">Previous page</div>
+  <div>
+    <div (click)="previousPage()" *ngIf="this.page > 1">Previous page</div>
     <div (click)="nextPage()">Next page</div>
-  </div> -->
+  </div>
   <div id="games-list">
     <div *ngFor="let game of gamesList">
       <!-- tamaños imagen: t_1080p, t_thumb, t_cover_big, t_cover_big_2x -->
