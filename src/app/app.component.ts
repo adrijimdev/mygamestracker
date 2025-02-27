@@ -3,7 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
 import { GamesService } from './services/games.service';
+import { GenresService } from './services/genres.service';
 import { GameModel } from './models/game-model';
+import { GenreModel } from './models/genre-model';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +16,13 @@ import { GameModel } from './models/game-model';
 export class AppComponent {
   title = 'mygamestracker';
   gamesList : GameModel[] = [];
+  genresList : GenreModel[] = [];
   offset: number = 0;
 
-  constructor(private gamesService: GamesService) { }
+  constructor(private gamesService : GamesService, private genresService : GenresService) { }
 
   ngOnInit() {
+    // this.bringGenres();
     this.bringGames()
   }
 
@@ -32,9 +36,25 @@ export class AppComponent {
     this.bringGames();
   }
 
+  changeGenre(event : Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+
+    if (selectedValue === ""){
+      this.offset = 0;
+      this.bringGames();
+    }
+  }
+
   bringGames() {
     this.gamesService.getAllGames(this.offset).subscribe({
       next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
+      error: (err) => console.error('Error al obtener juegos:', err)
+    });
+  }
+
+  bringGenres() {
+    this.genresService.getGenres().subscribe({
+      next: (data: GenreModel[]) => this.genresList = data, //Se asignan al array genresList los géneros obtenidos
       error: (err) => console.error('Error al obtener juegos:', err)
     });
   }

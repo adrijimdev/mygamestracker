@@ -1,12 +1,17 @@
 <div id="container">
-  <div>
+  <!-- <select name="genres" id="genre-select" (change)="changeGenre($event)">
+    <option value="" disabled selected>Select a genre</option>
+    <option value="">All genres</option>
+    <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
+  </select> -->
+  <!-- <div>
     <div (click)="previousPage()" *ngIf="this.offset > 0">Previous page</div>
     <div (click)="nextPage()">Next page</div>
-  </div>
+  </div> -->
   <div id="games-list">
     <div *ngFor="let game of gamesList">
       <!-- tamaños imagen: t_1080p, t_thumb, t_cover_big, t_cover_big_2x -->
-      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{game.cover}}.png" alt="{{game.name}}'s cover">
+      <img src="{{game.cover}}" alt="{{game.name}}'s cover" width="500">
       <div>{{game.name}}</div>
     </div>
   </div>
