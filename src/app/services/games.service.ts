@@ -14,7 +14,7 @@ export class GamesService {
 
   //Get all games
   getAllGames(page : number): Observable<GameModel[]> {
-    return this.http.get<any[]>(`${this.functionUrl}/${page}`).pipe(
+    return this.http.get<any[]>(`${this.functionUrl}?page=${page}`).pipe(
       map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
     );
   }
