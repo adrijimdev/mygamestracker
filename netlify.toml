@@ -8,3 +8,6 @@
 [dev]
   # Puerto para la simulación local de funciones
   functionsPort = 9999
+
+[[plugins]]
+  package = "@netlify/plugin-angular"
