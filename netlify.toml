@@ -2,7 +2,7 @@
   # Indica dónde están los archivos compilados de Angular
   publish = "dist/mygamestracker/browser/browser"
   # Directorio donde se encuentran las funciones de Netlify
-  functions = ".netlify/functions"
+  functions = "netlify/functions"
 
 [dev]
   # Puerto para la simulación local de funciones
