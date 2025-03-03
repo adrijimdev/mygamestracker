@@ -19,6 +19,12 @@ export class GamesService {
     );
   }
 
+  getGamesByGenre(genre : string, page : number): Observable<GameModel[]> {
+    return this.http.get<any[]>(`${this.functionUrl}?genre=${genre}&page=${page}`).pipe(
+      map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
+    );
+  }
+
 
 
 

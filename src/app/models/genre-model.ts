@@ -4,8 +4,8 @@ export class GenreModel {
   slug: string;
 
   constructor(data: any) {
-    this._id = data._id;
+    this._id = data.id;
     this.name = data.name;
-    this.slug = data.summary;
+    this.slug = data.slug;
   }
 }

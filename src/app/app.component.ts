@@ -17,12 +17,13 @@ export class AppComponent {
   title = 'mygamestracker';
   gamesList : GameModel[] = [];
   genresList : GenreModel[] = [];
-  page = 1;
+  page : number = 1;
+  genre : string = "";
 
   constructor(private gamesService : GamesService, private genresService : GenresService) { }
 
   ngOnInit() {
-    // this.bringGenres();
+    this.bringGenres();
     this.bringGames()
   }
 
@@ -36,16 +37,22 @@ export class AppComponent {
     this.bringGames();
   }
 
-  // changeGenre(event : Event) {
-  //   const selectedValue = (event.target as HTMLSelectElement).value;
+  changeGenre(event : Event) {
+    this.page = 1;
+    this.genre = (event.target as HTMLSelectElement).value;
 
-  //   if (selectedValue === ""){
-  //     this.offset = 0;
-  //     this.bringGames();
-  //   }
-  // }
+    this.bringGames();
+  }
 
   bringGames() {
+    if (this.genre !== "") {
+      this.gamesService.getGamesByGenre(this.genre, this.page).subscribe({
+        next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
+        error: (err) => console.error('Error al obtener juegos:', err)
+      });
+      return;
+    }
+
     this.gamesService.getAllGames(this.page).subscribe({
       next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
       error: (err) => console.error('Error al obtener juegos:', err)

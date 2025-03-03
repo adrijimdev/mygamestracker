@@ -1,9 +1,9 @@
 <div id="container">
-  <!-- <select name="genres" id="genre-select" (change)="changeGenre($event)">
+  <select name="genres" id="genre-select" (change)="changeGenre($event)">
     <option value="" disabled selected>Select a genre</option>
     <option value="">All genres</option>
     <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
-  </select> -->
+  </select>
   <div>
     <div (click)="previousPage()" *ngIf="this.page > 1">Previous page</div>
     <div (click)="nextPage()">Next page</div>
