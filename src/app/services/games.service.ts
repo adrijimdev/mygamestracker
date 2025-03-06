@@ -25,6 +25,12 @@ export class GamesService {
     );
   }
 
+  searchGames(searchString : string) {
+    return this.http.get<any[]>(`${this.functionUrl}?search=${searchString}`).pipe(
+      map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
+    );
+  }
+
 
 
 
