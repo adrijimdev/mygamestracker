@@ -4,7 +4,7 @@
     <option value="">All genres</option>
     <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
   </select>
-  <input type="text" name="search" id="search-input" class="form-control m-1 w-50" placeholder="Search for a game" [(ngModel)]="searchString" (change)="searchGame()">
+  <input type="text" name="search" id="search-input" class="form-control m-1 w-50" placeholder="Search for a game" [(ngModel)]="searchString" (change)="bringGames()">
   <div class="d-flex align-items-right">
     <div (click)="previousPage()" *ngIf="this.page > 1" class="m-2">Previous page</div>
     <div (click)="nextPage()" class="m-2">Next page</div>
@@ -17,4 +17,5 @@
       <div class="p-2">{{game.name}}</div>
     </div>
   </div>
+  <!-- <div *ngIf="this.page > 1">Volver arriba</div> -->
 </div>

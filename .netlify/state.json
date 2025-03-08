@@ -1,0 +1,21 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Alicante",
+			"country": {
+				"code": "ES",
+				"name": "Spain"
+			},
+			"subdivision": {
+				"code": "VC",
+				"name": "Valencia"
+			},
+			"timezone": "Europe/Madrid",
+			"latitude": 38.3535,
+			"longitude": -0.5118,
+			"postalCode": "03005"
+		},
+		"timestamp": 1741342758662
+	},
+	"siteId": "581c2e88-ba3f-4a1e-bb16-40231beff7ec"
+}

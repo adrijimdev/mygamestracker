@@ -48,7 +48,17 @@ export class GameListComponent {
 
   bringGames() {
     if (this.genre !== "") {
-      this.gamesService.getGamesByGenre(this.genre, this.page).subscribe({
+      this.gamesService.searchGames(this.searchString, this.page).subscribe({
+        next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
+        error: (err) => console.error('Error al obtener juegos:', err)
+      });
+      return;
+    }
+
+    if (this.searchString !== "") {
+      this.genre = "";
+      this.page = 1;
+      this.gamesService.searchGames(this.searchString, this.page).subscribe({
         next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
         error: (err) => console.error('Error al obtener juegos:', err)
       });
@@ -56,7 +66,8 @@ export class GameListComponent {
     }
 
     this.gamesService.getAllGames(this.page).subscribe({
-      next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
+      // next: (data: GameModel[]) => this.gamesList = this.gamesList.concat(data), //Se asignan al array gamesList los juegos obtenidos
+      next: (data : GameModel[]) => this.gamesList = data,
       error: (err) => console.error('Error al obtener juegos:', err)
     });
   }
@@ -68,11 +79,11 @@ export class GameListComponent {
     });
   }
 
-  searchGame() {
-    this.gamesService.searchGames(this.searchString).subscribe({
-      next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
-      error: (err) => console.error('Error al obtener juegos:', err)
-    });
-  }
+  // searchGame() {
+  //   this.gamesService.searchGames(this.searchString).subscribe({
+  //     next: (data: GameModel[]) => this.gamesList = data, //Se asignan al array gamesList los juegos obtenidos
+  //     error: (err) => console.error('Error al obtener juegos:', err)
+  //   });
+  // }
 
 }

@@ -25,8 +25,8 @@ export class GamesService {
     );
   }
 
-  searchGames(searchString : string) {
-    return this.http.get<any[]>(`${this.functionUrl}?search=${searchString}`).pipe(
+  searchGames(searchString : string, page : number): Observable<GameModel[]> {
+    return this.http.get<any[]>(`${this.functionUrl}?search=${searchString}?page=${page}`).pipe(
       map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
     );
   }
