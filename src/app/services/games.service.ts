@@ -13,8 +13,20 @@ export class GamesService {
   constructor(private http: HttpClient) { }
 
   //Get all games
-  getAllGames(page : number): Observable<GameModel[]> {
-    return this.http.get<any[]>(`${this.functionUrl}?page=${page}`).pipe(
+  getAllGames(page : number, genre? : string, searchString? : string): Observable<GameModel[]> {
+    let url = `${this.functionUrl}?page=${page}`;
+
+    if (genre && genre !== undefined) {
+      url += `&genre=${genre}`;
+    }
+
+    if (searchString && searchString !== undefined) {
+      url += `&search=${searchString}`;
+    }
+
+    console.log(`URL = "${url}"`);
+
+    return this.http.get<any[]>(url).pipe(
       map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
     );
   }
@@ -26,7 +38,7 @@ export class GamesService {
   }
 
   searchGames(searchString : string, page : number): Observable<GameModel[]> {
-    return this.http.get<any[]>(`${this.functionUrl}?search=${searchString}?page=${page}`).pipe(
+    return this.http.get<any[]>(`${this.functionUrl}?search=${searchString}&page=${page}`).pipe(
       map(data => data.map(game => new GameModel(game))) // Cada juego de la respuesta se convierte en una instancia de GameModel
     );
   }

@@ -1,10 +1,9 @@
 <div class="d-flex justify-content-center m-2">
-  <select name="genres" id="genre-select" class="form-select ml-5" (change)="changeGenre($event)">
-    <option value="" disabled selected>Select a genre</option>
-    <option value="">All genres</option>
+  <select name="genres" id="genre-select" class="form-select ml-5" [ngModel]="genre" (change)="filterByGenre($event)">
+    <option value="" selected>All genres</option>
     <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
   </select>
-  <input type="text" name="search" id="search-input" class="form-control m-1 w-50" placeholder="Search for a game" [(ngModel)]="searchString" (change)="bringGames()">
+  <input type="text" name="search" id="search-input" class="form-control m-1 w-50" placeholder="Search for a game" [(ngModel)]="searchString" (change)="searchGames()">
   <div class="d-flex align-items-right">
     <div (click)="previousPage()" *ngIf="this.page > 1" class="m-2">Previous page</div>
     <div (click)="nextPage()" class="m-2">Next page</div>
