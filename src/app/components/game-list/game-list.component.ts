@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 import { GamesService } from '../../services/games.service';
 import { GenresService } from '../../services/genres.service';
@@ -10,7 +11,7 @@ import { GenreModel } from '../../models/genre-model';
 
 @Component({
   selector: 'game-list',
-  imports: [NgFor, NgIf, FormsModule, RouterModule],
+  imports: [NgFor, NgIf, FormsModule, RouterModule, InfiniteScrollDirective],
   templateUrl: './game-list.component.html',
   styleUrl: './game-list.component.css'
 })

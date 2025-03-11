@@ -4,17 +4,20 @@
     <option *ngFor="let genre of genresList" value="{{genre.slug}}">{{genre.name}}</option>
   </select>
   <input type="text" name="search" id="search-input" class="form-control m-1 w-50" placeholder="Search for a game" [(ngModel)]="searchString" (change)="searchGames()">
-  <div class="d-flex align-items-right">
+  <!-- <div class="d-flex align-items-right">
     <div (click)="previousPage()" *ngIf="this.page > 1" class="m-2">Previous page</div>
     <div (click)="nextPage()" *ngIf="this.isNextPage" class="m-2">Next page</div>
-  </div>
+  </div> -->
 </div>
-<div id="container">
-  <div id="games-list" class="d-flex flex-wrap justify-content-center">
-    <div *ngFor="let game of gamesList" class="card m-2">
-      <img src="{{game.cover}}" alt="{{game.name}}'s cover" width="500" class="rounded-top">
-      <div class="p-2">{{game.name}}</div>
+
+<section infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+  <div id="container">
+    <div id="games-list" class="d-flex flex-wrap justify-content-center">
+      <div *ngFor="let game of gamesList" class="card m-2">
+        <img src="{{game.cover}}" alt="{{game.name}}'s cover" width="500" class="rounded-top">
+        <div class="p-2">{{game.name}}</div>
+      </div>
     </div>
+    <!-- <div *ngIf="this.page > 1">Volver arriba</div> -->
   </div>
-  <!-- <div *ngIf="this.page > 1">Volver arriba</div> -->
-</div>
+</section>
