@@ -20,6 +20,7 @@ export class GameListComponent {
   page : number = 1;
   genre : string = "";
   searchString : string = "";
+  isNextPage : boolean = true;
 
   constructor(private gamesService : GamesService, private genresService : GenresService) { }
 
@@ -58,7 +59,12 @@ export class GameListComponent {
   bringGames() {
     this.gamesService.getAllGames(this.page, this.genre || undefined, this.searchString || undefined).subscribe({
       // next: (data: GameModel[]) => this.gamesList = this.gamesList.concat(data), //Se asignan al array gamesList los juegos obtenidos
-      next: (data : GameModel[]) => this.gamesList = data,
+      next: (data) => {
+        this.gamesList = data.results; // Guardar la lista de juegos
+        if (!data.next) {
+          this.isNextPage = false;
+        }
+      },
       error: (err) => console.error('Error al obtener juegos:', err)
     });
   }
@@ -68,6 +74,14 @@ export class GameListComponent {
       next: (data: GenreModel[]) => this.genresList = data, //Se asignan al array genresList los géneros obtenidos
       error: (err) => console.error('Error al obtener juegos:', err)
     });
+  }
+
+  onScroll() {
+    if (!this.isNextPage) {
+      return
+    }
+    this.page += 1;
+    this.bringGames();
   }
 
 }

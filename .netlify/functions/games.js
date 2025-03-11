@@ -29,7 +29,10 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data.results),
+      body: JSON.stringify({
+        results: response.data.results,
+        next: response.data.next
+      }),
     };
   } catch (error) {
     console.error("Error en la función:", error.message);
