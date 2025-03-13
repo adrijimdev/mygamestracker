@@ -1,3 +1,13 @@
 #genre-select {
   width: 15%;
 }
+
+.return-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}

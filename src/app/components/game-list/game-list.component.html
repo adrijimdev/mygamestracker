@@ -18,6 +18,12 @@
         <div class="p-2">{{game.name}}</div>
       </div>
     </div>
-    <!-- <div *ngIf="this.page > 1">Volver arriba</div> -->
+    <div *ngIf="this.page > 1 && !isAtTop" class="return-top btn btn-primary" (click)="scrollToTop()">Return top</div>
+  </div>
+  <div *ngIf="this.loadingData" class="d-flex justify-content-center align-items-center">
+    <div class="loading text-center">
+      <!-- <img src="../../../assets/img/loading.gif" width="50%" alt="Gif de un círculo girando mientras carga el contenido" class="mx-auto"> -->
+      <div>LOADING...</div>
+    </div>
   </div>
 </section>

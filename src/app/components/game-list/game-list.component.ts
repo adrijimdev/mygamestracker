@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +22,14 @@ export class GameListComponent {
   genre : string = "";
   searchString : string = "";
   isNextPage : boolean = true;
+  loadingData : boolean = false;
+  isAtTop : boolean = true;
 
   constructor(private gamesService : GamesService, private genresService : GenresService) { }
+
+  @HostListener('window:scroll', []) detectScroll() {
+    this.isAtTop = window.scrollY === 0; // para saber si el usuario está en la parte superior de la página
+  }
 
   ngOnInit() {
     this.bringGenres();
@@ -58,13 +64,15 @@ export class GameListComponent {
   }
 
   bringGames() {
+    this.loadingData = true;
     this.gamesService.getAllGames(this.page, this.genre || undefined, this.searchString || undefined).subscribe({
       // next: (data: GameModel[]) => this.gamesList = this.gamesList.concat(data), //Se asignan al array gamesList los juegos obtenidos
       next: (data) => {
-        this.gamesList = data.results; // Guardar la lista de juegos
+        this.gamesList = this.gamesList.concat(data.results); // Guardar la lista de juegos
         if (!data.next) {
           this.isNextPage = false;
         }
+        this.loadingData = false;
       },
       error: (err) => console.error('Error al obtener juegos:', err)
     });
@@ -84,5 +92,10 @@ export class GameListComponent {
     this.page += 1;
     this.bringGames();
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
 }
