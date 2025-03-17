@@ -6,6 +6,7 @@ const apiUrl = `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`;
 exports.handler = async (event) => {
   let genre = "";
   let searchString ="";
+  let order = "";
 
   try {
     console.log("Iniciando función de Netlify...");
@@ -24,6 +25,13 @@ exports.handler = async (event) => {
       searchString = event.queryStringParameters.search;
       url += `&search=${searchString}`;
     }
+
+    if (event.queryStringParameters.order) {
+      order = event.queryStringParameters.order;
+      url += `&ordering=-${order}`;
+    }
+
+    console.log(`URL: ${url}`);
 
     const response = await axios.get(url);
     // console.log(`Respuesta obtenida: ${JSON.stringify(response.data.results)}`);

@@ -8,13 +8,14 @@
     <div (click)="previousPage()" *ngIf="this.page > 1" class="m-2">Previous page</div>
     <div (click)="nextPage()" *ngIf="this.isNextPage" class="m-2">Next page</div>
   </div> -->
-  <!-- <div class="d-flex align-items-right">
+  <div class="d-flex align-items-right">
     <select name="order" id="order-select" class="form-select ml-5" [ngModel]="order" (change)="orderBy($event)">
-      <option value="name" selected>Order by name</option>
-      <option value="rating">Order by rating</option>
+      <option value="" disabled selected>Order by...</option>
+      <option value="">Reset</option>
+      <option value="metacritic">Order by rating</option>
       <option value="released">Order by released date</option>
     </select>
-  </div> -->
+  </div>
 </div>
 
 <section infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">

@@ -14,7 +14,7 @@ export class GamesService {
   constructor(private http: HttpClient) { }
 
   //Get all games
-  getAllGames(page: number, genre?: string, searchString?: string): Observable<{ results: GameModel[], next: string | null }> {
+  getAllGames(page: number, genre?: string, searchString?: string, order? : string): Observable<{ results: GameModel[], next: string | null }> {
     let url = `${this.functionUrl}?page=${page}`;
 
     if (genre) {
@@ -23,6 +23,10 @@ export class GamesService {
 
     if (searchString) {
       url += `&search=${searchString}`;
+    }
+
+    if (order) {
+      url += `&order=${order}`;
     }
 
     console.log(`URL = "${url}"`);

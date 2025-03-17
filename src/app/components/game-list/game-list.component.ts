@@ -65,13 +65,15 @@ export class GameListComponent {
   }
 
   orderBy(event : Event) {
+    this.page = 1;
     this.order = (event.target as HTMLSelectElement).value;
     console.log(`Order = "${this.order}"`);
+    this.bringGames();
   }
 
   bringGames() {
     this.loadingData = true;
-    this.gamesService.getAllGames(this.page, this.genre || undefined, this.searchString || undefined).subscribe({
+    this.gamesService.getAllGames(this.page, this.genre || undefined, this.searchString || undefined, this.order || undefined).subscribe({
       // next: (data: GameModel[]) => this.gamesList = this.gamesList.concat(data), //Se asignan al array gamesList los juegos obtenidos
       next: (data) => {
         if (this.page > 1) {
