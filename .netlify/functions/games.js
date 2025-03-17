@@ -11,6 +11,7 @@ exports.handler = async (event) => {
     console.log("Iniciando función de Netlify...");
 
     console.log(`Petición recibida: ${event.path}`);
+    console.log(`Query Params: ${JSON.stringify(event.queryStringParameters)}`);
     const page = event.queryStringParameters.page || 1;
     let url = `${apiUrl}&page=${page}&page_size=15`;
 

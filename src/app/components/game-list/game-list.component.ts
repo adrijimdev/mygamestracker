@@ -24,6 +24,7 @@ export class GameListComponent {
   isNextPage : boolean = true;
   loadingData : boolean = false;
   isAtTop : boolean = true;
+  order : string = "";
 
   constructor(private gamesService : GamesService, private genresService : GenresService) { }
 
@@ -63,12 +64,21 @@ export class GameListComponent {
     this.bringGames();
   }
 
+  orderBy(event : Event) {
+    this.order = (event.target as HTMLSelectElement).value;
+    console.log(`Order = "${this.order}"`);
+  }
+
   bringGames() {
     this.loadingData = true;
     this.gamesService.getAllGames(this.page, this.genre || undefined, this.searchString || undefined).subscribe({
       // next: (data: GameModel[]) => this.gamesList = this.gamesList.concat(data), //Se asignan al array gamesList los juegos obtenidos
       next: (data) => {
-        this.gamesList = this.gamesList.concat(data.results); // Guardar la lista de juegos
+        if (this.page > 1) {
+          this.gamesList = this.gamesList.concat(data.results);
+        } else {
+          this.gamesList = data.results;
+        }
         if (!data.next) {
           this.isNextPage = false;
         }
